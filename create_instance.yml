@@ -1,0 +1,13 @@
+---
+- name: Setup
+  hosts: all
+  user: $ENV(USER)
+  roles:
+   - aws
+  tasks:
+    - include: roles/aws/tasks/create.yml
+
+- hosts: launched
+  user: ec2-user
+  tasks:
+   - include: roles/common/tasks/breadcrumb.yml

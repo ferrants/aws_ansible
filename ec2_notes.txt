@@ -1,0 +1,16 @@
+EC2
+===
+
+1. Define a job flow
+  - name
+2. Run your application
+  - Custom Jar
+  - Hive Program
+  - Streaming
+  - Pig
+  - Hbase
+3. Select Jar
+  - Give it Jar Arguments
+  - output location: s3n://mferrante/cloudburst/output/2013-07-24
+
+

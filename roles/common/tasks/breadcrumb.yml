@@ -1,0 +1,3 @@
+---
+- name: Breadcrumb
+  lineinfile: create=yes dest=~/ansible.txt line="ansible was here" regexp="ansible"

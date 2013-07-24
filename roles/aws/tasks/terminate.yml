@@ -1,0 +1,8 @@
+- name: teardown ec2 instances {{ ec2.instance_ids }}
+  local_action:
+    module: ec2
+    key_name: "mf-air"
+    ec2_access_key: "{{ aws_access_key }}"
+    ec2_secret_key: "{{ aws_secret_key }}"
+    state: absent
+    instance_ids: "{{ ec2.instance_ids }}"

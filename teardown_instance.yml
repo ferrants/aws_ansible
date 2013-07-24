@@ -1,0 +1,10 @@
+---
+- name: Teardown up Amazon Instance
+  hosts: localhost
+  user: $ENV(USER)
+  vars:
+    ec2: { instance_ids: "{{ instance_ids }}" }
+  roles:
+   - aws
+  tasks:
+    - include: roles/aws/tasks/terminate.yml

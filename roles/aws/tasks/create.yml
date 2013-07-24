@@ -1,0 +1,25 @@
+---
+- name: check boto python dependency
+  local_action: pip name=boto state=present
+
+- name: create instance
+  local_action:
+    module: ec2
+    key_name: "{{ key_name }}"
+    ec2_access_key: "{{ aws_access_key }}"
+    ec2_secret_key: "{{ aws_secret_key }}"
+    region: "us-east-1"
+    group: "quick-start-1"
+    instance_type: t1.micro
+    image: "ami-05355a6c"
+    wait: yes
+    count: "1"
+  register: ec2
+
+- name: create dynamic host group
+  local_action: add_host hostname=${item.public_ip} groupname=launched
+  with_items: ${ec2.instances}
+
+- name: make sure ssh is up before working on the new instances
+  local_action: wait_for host=${item.public_dns_name} port=22 delay=60 timeout=320 state=started
+  with_items: ${ec2.instances}
